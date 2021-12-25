@@ -33,10 +33,10 @@ class Timer:
             elapsed_in_sec = self.get_remaining_time_in_sec()
             finished = elapsed_in_sec in range(0, 5)
             if finished:
-                self.on_alarm()
-            elif elapsed_in_sec in [10 * 60, 5 * 60, 60] and self.on_alarm:
                 # shutdown pc
                 os.system(f"shutdown /s")
+            elif elapsed_in_sec in [10 * 60, 5 * 60, 60] and self.on_alarm:
+                self.on_alarm()
 
     def set_countdown(self, countdown_in_mins):
         self.countdown_in_mins = countdown_in_mins
