@@ -1,5 +1,7 @@
 from gui import Gui
+from timer import Timer
 
-gui = Gui()
+timer = Timer()
+gui = Gui(timer=timer)
 
 gui.display()
