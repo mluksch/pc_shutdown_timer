@@ -11,8 +11,9 @@ class Timer:
         self.countdown_in_mins = config.COUNTDOWN_DEFAULT_MINS
         self.stopped = True
 
-    def listen(self, on_tick):
+    def listen(self, on_tick, on_alarm):
         self.on_tick = on_tick
+        self.on_alarm = on_alarm
 
     def start(self):
         self.stopped = False
@@ -31,6 +32,8 @@ class Timer:
                 self.on_tick()
             elapsed_in_sec = self.get_remaining_time_in_sec()
             finished = elapsed_in_sec == 0
+            if elapsed_in_sec == 10 * 60 and self.on_alarm:
+                self.on_alarm()
             if finished:
                 # shutdown pc
                 os.system(f"shutdown /s")
