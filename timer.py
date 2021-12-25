@@ -31,10 +31,11 @@ class Timer:
             if self.on_tick:
                 self.on_tick()
             elapsed_in_sec = self.get_remaining_time_in_sec()
-            finished = elapsed_in_sec in range(0, 5)
+            finished = elapsed_in_sec in range(0, 5) and not self.stopped
             if finished:
                 # shutdown pc
                 os.system(f"shutdown /s")
+                self.stopped = True
             elif elapsed_in_sec in [10 * 60, 5 * 60, 60] and self.on_alarm:
                 self.on_alarm()
 
