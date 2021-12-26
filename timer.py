@@ -1,4 +1,4 @@
-import os
+import subprocess
 import time
 
 import config
@@ -34,8 +34,8 @@ class Timer:
             finished = elapsed_in_sec in range(0, 5) and not self.stopped
             if finished:
                 # shutdown pc
-                os.system(f"shutdown /s")
                 self.stopped = True
+                subprocess.run(["shutdown", "-s"])
             elif elapsed_in_sec in [10 * 60, 5 * 60, 60] and self.on_alarm:
                 self.on_alarm()
 
